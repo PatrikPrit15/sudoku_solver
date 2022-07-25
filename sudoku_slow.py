@@ -48,7 +48,9 @@ for y in range(9):
     for x,v in enumerate(vstup):
         if v!=0:
             colapse(y,x,v)
-    
+start=time.perf_counter()
+counter=0    
+
 en=1
 while en:
     en=0
@@ -56,6 +58,7 @@ while en:
         for x in range(9):
             if board[y][x][0]==0 and len(board[y][x][1])==1:
                 en=1
+                counter+=20
                 colapse(y,x,list(board[y][x][1])[0])
 
 print()
@@ -67,6 +70,7 @@ while 1:
     xmi=-1
     ymi=-1
     poc=0
+    counter+=81
     for y in range(9):
         for x in range(9):
             l=len(board[y][x][1])
@@ -86,12 +90,13 @@ while 1:
     if poc==81:
         break
     if mi<10:
+        counter+=20
         colapse(ymi,xmi,random.choice(list(board[ymi][xmi][1])))
 
 
 for r in board:
-    print(*[e[0] for e in r])
+    print(*[e[1] for e in r])
     
-
+print(f"cas bol {time.perf_counter()-start}s a vykonalo sa +- {counter} operacii")
 
 

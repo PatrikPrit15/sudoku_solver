@@ -48,8 +48,9 @@ for y in range(9):
 
 start=time.perf_counter()
 print("riesenie je v procese\n")
-
+counter=0
 def solve(c):
+    global counter
     y=c//9
     x=c%9
     if c==81:
@@ -61,11 +62,12 @@ def solve(c):
                     print("|",end="")
                 print(board[yv][xv][0],end="")
             print()
-        print(f"cas bol {time.perf_counter()-start}s")
+        print(f"cas bol {time.perf_counter()-start}s a vykonalo sa +- {counter} operacii")
         exit()
-    elif board[y][x][1]==0:
+    if board[y][x][1]==0:
         for i in range(1,10):
             board[y][x][0]=i
+            counter+=31
             if is_pos(y,x,i):
                 solve(c+1)
         board[y][x][0]=0
